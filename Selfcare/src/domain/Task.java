@@ -9,8 +9,10 @@ public class Task {
 	private int clear; // 수행여부
 	private String mem_Id;
 	private LocalDateTime taskdate;
+	private int isRemoved;
 
-	public Task(int task_Id, LocalDateTime regdate, String contents, int clear, String mem_Id, LocalDateTime taskdate) {
+	public Task(int task_Id, LocalDateTime regdate, String contents, int clear, String mem_Id, LocalDateTime taskdate,
+			int isRemoved) {
 		super();
 		this.task_Id = task_Id;
 		this.regdate = regdate;
@@ -18,6 +20,7 @@ public class Task {
 		this.clear = clear;
 		this.mem_Id = mem_Id;
 		this.taskdate = taskdate;
+		this.isRemoved = isRemoved;
 	}
 
 	public int getTask_Id() {
@@ -66,5 +69,13 @@ public class Task {
 
 	public void setTaskdate(LocalDateTime taskdate) {
 		this.taskdate = taskdate;
+	}
+
+	public int getIsRemoved() {
+		return isRemoved;
+	}
+
+	public void setIsRemoved(int isRemoved) {
+		this.isRemoved = isRemoved;
 	}
 }

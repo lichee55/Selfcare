@@ -20,7 +20,7 @@ public class CommentService {
 	public void delete(Comment comment) {
 		commentRepository.delete(comment);
 	}
-	public ArrayList<Comment> findComments(){
-		return commentRepository.findAll();
+	public ArrayList<Comment> findComments(Comment comment){
+		return commentRepository.findAll(comment);
 	}
 }
