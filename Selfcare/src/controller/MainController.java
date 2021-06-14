@@ -10,11 +10,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import domain.Member;
+import service.MemberService;
 
 @WebServlet(name = "mainController", urlPatterns = "/main/*")
 public class MainController extends HttpServlet {
 
-	private Map<String, Controller> controllerMap = new HashMap<>();
+	private final MemberService memberService = new MemberService();
 
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)
@@ -27,21 +31,36 @@ public class MainController extends HttpServlet {
 		System.out.println("uri " + uri);
 		System.out.println("conPath " + conPath);
 		System.out.println("com " + com);
-		if (com.equals("/")) {
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/index.jsp");
-			dispatcher.forward(request, response);
-		} else {
-			String[] tokens = com.split("/");
-			String domain = tokens[1];
-			Controller controller = controllerMap.get(domain);
-			if (controller == null) {
-				response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-				return;
-			}
-			ModelAndView mv = controller.process(request, response, com);
+
+		if (com.equals("/index")) {
+			ModelAndView mv = new ModelAndView();
+			mv.setViewName("index");
 			String viewPath = viewResolver(mv.getViewName());
 			View view = new View(viewPath);
 			view.render(mv.getModel(), request, response);
+		} else if (com.equals("/login")) {
+			if (request.getMethod().equals("GET")) {
+				ModelAndView mv = new ModelAndView();
+				mv.setViewName("login");
+				String viewPath = viewResolver(mv.getViewName());
+				View view = new View(viewPath);
+				view.render(mv.getModel(), request, response);
+			} else {
+				String mem_id = request.getParameter("mem_id");
+				String passwd = request.getParameter("password");
+				Member member = new Member(mem_id, null, passwd);
+				boolean login = memberService.logIn(member);
+				if (!login) {
+					System.out.println("로그인 실패");
+					response.sendRedirect("/main/login");
+					return;
+				}
+				// Member mem = memberService.findMember(mem_id);
+				HttpSession httpsession = request.getSession();
+				// httpsession.setAttribute("member", mem);
+			}
+		} else {
+			response.sendRedirect("/main/index");
 		}
 	}
 
