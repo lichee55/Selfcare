@@ -15,15 +15,14 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.sql.Connection;
 
-
 public class TaskRepository {
 	private static TaskRepository instance;
 	private static DataSource ds;
-	
+
 	private TaskRepository() {
 
 	}
-	
+
 	public static TaskRepository getInstacne() {
 		if (instance == null) {
 			try {
@@ -37,31 +36,89 @@ public class TaskRepository {
 		}
 		return instance;
 	}
-	
+
 	public void save(Task task) {
-		Connection conn=null;
+		Connection conn = null;
 		PreparedStatement pstmt = null;
 		String sql = "INSERT INTO task(content,clear,regdate,member_id) VALUE (?,?,now(),?)";
 		try {
-			conn=ds.getConnection();
-		} catch(SQLException e) {
+			conn = ds.getConnection();
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		try {
-			pstmt=conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, task.getContents());
 			pstmt.setInt(2, 0);
 			pstmt.setString(3, task.getMem_Id());
-		}catch(SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			try {
 				pstmt.close();
 				conn.close();
-			} catch(SQLException e) {
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public void update(Task task) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "UPDATE task SET content=?, clear=? WHERE task_id=?";
+		try {
+			conn = ds.getConnection();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, task.getContents());
+			pstmt.setInt(2, task.getClear());
+			pstmt.setInt(3, task.getTask_Id());
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
 	}
 	
+	public void delete(Task task) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "DELETE FROM task WHERE id=?";
+		try {
+			conn = ds.getConnection();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setLong(1, task.getTask_Id());
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public ArrayList<Task> findTaskByDate(LocalDateTime time){
+		ArrayList<Task> taskList=new ArrayList<Task>();
+		
+		
+		return taskList;
+	}
 }
