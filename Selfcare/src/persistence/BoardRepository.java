@@ -148,7 +148,7 @@ public class BoardRepository {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT * FROM BOARD WHERE isRemoved=0 ORDER BY REGDATE DESC LIMIT ?,10";
+		String sql = "SELECT * FROM BOARD WHERE isRemoved=0 ORDER BY REGDATE DESC LIMIT "+(pageNum-1)*10+",10";
 		ArrayList<Board> boards = new ArrayList<Board>();
 		try {
 			conn = ds.getConnection();
@@ -158,7 +158,7 @@ public class BoardRepository {
 		}
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setLong(1, (pageNum-1)*10);
+			//pstmt.setInt(1, (pageNum-1)*10);
 			rs = pstmt.executeQuery(sql);
 			while (rs.next()) {
 				int idRe = rs.getInt("board_id");

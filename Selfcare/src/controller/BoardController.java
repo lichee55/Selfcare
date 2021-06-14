@@ -41,8 +41,9 @@ public class BoardController extends HttpServlet {
 			System.out.println(boardPage);
 			ArrayList<Board> boards = boardService.findBoards(Integer.parseInt(boardPage));
 			ModelAndView mv = new ModelAndView();
-			mv.setViewName("/board/list");
+			mv.setViewName("list");
 			mv.getModel().put("boards", boards);
+			System.out.println(boards.get(0).getBoard_Id());
 			String viewPath = viewResolver(mv.getViewName());
 			View view = new View(viewPath);
 			view.render(mv.getModel(), request, response);
@@ -50,6 +51,6 @@ public class BoardController extends HttpServlet {
 	}
 
 	private String viewResolver(String viewName) {
-		return "/WEB-INF/view/" + viewName + ".jsp";
+		return "/WEB-INF/view/board/" + viewName + ".jsp";
 	}
 }
