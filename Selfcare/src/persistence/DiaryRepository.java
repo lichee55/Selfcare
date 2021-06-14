@@ -12,7 +12,6 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import domain.Board;
 import domain.Diary;
 
 public class DiaryRepository {
@@ -34,7 +33,7 @@ public class DiaryRepository {
 	public void insert(Diary diary){
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		String sql = "INSERT INTO DIARY(CONTENT,REGDATE,MEMBER_ID) VALUES (?,now(),?)";
+		String sql = "INSERT INTO DIARY(CONTENT,REGDATE,MEMBER_ID,isRemoved) VALUES (?,now(),?,0)";
 		try {
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -57,7 +56,7 @@ public class DiaryRepository {
 	public void update(Diary diary){
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		String sql = "UPDATE DIARY SET CONTENTS=? WHERE DIARY_ID=?";
+		String sql = "UPDATE DIARY SET CONTENT=? WHERE DIARY_ID=?";
 		try {
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -81,7 +80,7 @@ public class DiaryRepository {
 	public void delete(Diary diary){
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		String sql = "UPDATE DIARY SET isRemoved = 1 WHERE BOARD_ID=?";
+		String sql = "UPDATE DIARY SET isRemoved = 1 WHERE DIARY_ID=?";
 		try {
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -104,7 +103,7 @@ public class DiaryRepository {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT * FROM DIARY WHERE BOARD_ID="+id+"";
+		String sql = "SELECT * FROM DIARY WHERE BOARD_ID=?";
 		Diary diary = new Diary();
 		try {
 			conn = ds.getConnection();
@@ -114,13 +113,15 @@ public class DiaryRepository {
 		}
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, id);
 			rs = pstmt.executeQuery(sql);
 			if (rs.next()) {
 				int idRe=rs.getInt("diary_id");
 				String contents = rs.getString("content");
 				String mem_id = rs.getString("member_id");
 				LocalDateTime regdate = rs.getTimestamp("regdate").toLocalDateTime();
-				diary = new Diary(idRe,contents,mem_id,regdate);
+				int isRe=rs.getInt("isRemoved");
+				diary = new Diary(idRe,contents,mem_id,regdate,isRe);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -159,7 +160,8 @@ public class DiaryRepository {
 				String contents = rs.getString("content");
 				String mem_id = rs.getString("member_id");
 				LocalDateTime regdate = rs.getTimestamp("regdate").toLocalDateTime();
-				Diary diary = new Diary(idRe,contents,mem_id,regdate);
+				int isRe=rs.getInt("isRemoved");
+				Diary diary = new Diary(idRe,contents,mem_id,regdate,isRe);
 				diaryList.add(diary);
 			}
 		} catch (SQLException e) {

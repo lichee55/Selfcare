@@ -58,13 +58,13 @@ public class BoardRepository {
 	public void update(Board board){
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		String sql = "UPDATE BOARD SET TITLE=?,CONTENTS=? WHERE BOARD_ID=?";
+		String sql = "UPDATE BOARD SET TITLE=?,CONTENT=? WHERE BOARD_ID=?";
 		try {
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, board.getTitle());
 			pstmt.setString(2, board.getContents());
-			pstmt.setLong(3, board.getBoard_Id());
+			pstmt.setInt(3, board.getBoard_Id());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -87,7 +87,7 @@ public class BoardRepository {
 		try {
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setLong(1, board.getBoard_Id());
+			pstmt.setInt(1, board.getBoard_Id());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -102,7 +102,7 @@ public class BoardRepository {
 			}			
 		}		
 	}
-	public Board findById(Long id){
+	public Board findById(int id){
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -119,10 +119,10 @@ public class BoardRepository {
 			//pstmt.setLong(1, id);
 			rs = pstmt.executeQuery(sql);
 			if (rs.next()) {
-				int idRe=rs.getInt("id");
+				int idRe=rs.getInt("board_id");
 				String title = rs.getString("title");
 				String mem_id = rs.getString("member_id");
-				String contents = rs.getString("contents");
+				String contents = rs.getString("content");
 				LocalDateTime regdate = rs.getTimestamp("regdate").toLocalDateTime();
 				String hit = rs.getString("hit");
 				int isRe = rs.getInt("isRemoved");
@@ -148,7 +148,7 @@ public class BoardRepository {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT * FROM BOARD ORDER BY REGDATE DESC LIMIT ?,10";
+		String sql = "SELECT * FROM BOARD WHERE isRemoved=0 ORDER BY REGDATE DESC LIMIT ?,10";
 		ArrayList<Board> boards = new ArrayList<Board>();
 		try {
 			conn = ds.getConnection();
@@ -161,10 +161,10 @@ public class BoardRepository {
 			pstmt.setLong(1, (pageNum-1)*10);
 			rs = pstmt.executeQuery(sql);
 			while (rs.next()) {
-				int idRe = rs.getInt("id");
+				int idRe = rs.getInt("board_id");
 				String title = rs.getString("title");
-				String mem_id = rs.getString("writer");
-				String contents = rs.getString("contents");
+				String mem_id = rs.getString("member_id");
+				String contents = rs.getString("content");
 				LocalDateTime regdate = rs.getTimestamp("regdate").toLocalDateTime();
 				String hit = rs.getString("hit");
 				int isRe = rs.getInt("isRemoved");
@@ -186,10 +186,10 @@ public class BoardRepository {
 		}		
 		return boards;
 	}
-	public void updateHit(Long input) {
+	public void updateHit(int input) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		String sql = "UPDATE BOARD SET HIT=HIT+1 WHERE ID="+input+"";
+		String sql = "UPDATE BOARD SET HIT=HIT+1 WHERE BOARD_ID="+input+"";
 		try {
 			conn = ds.getConnection();
 			pstmt = conn.prepareStatement(sql);
