@@ -36,17 +36,42 @@ public class BoardController extends HttpServlet {
 			String boardPage = request.getParameter("page");
 			if (boardPage == null) {
 				System.out.println("no page param");
-				boardPage = "1";
+				response.sendRedirect("/board/list?page=1");
+				return;
 			}
-			System.out.println(boardPage);
+			if(Integer.parseInt(boardPage)<1) {
+				System.out.println("invalid page param");
+				response.sendRedirect("/board/list?page=1");
+				return;
+			}
 			ArrayList<Board> boards = boardService.findBoards(Integer.parseInt(boardPage));
 			ModelAndView mv = new ModelAndView();
 			mv.setViewName("list");
 			mv.getModel().put("boards", boards);
-			System.out.println(boards.get(0).getBoard_Id());
 			String viewPath = viewResolver(mv.getViewName());
 			View view = new View(viewPath);
 			view.render(mv.getModel(), request, response);
+			
+		}else if(com.equals("/insert")) {
+			if(request.getMethod().equals("GET")) {
+				System.out.println("insert get method in");
+				ModelAndView mv = new ModelAndView();
+				mv.setViewName("insert");
+				String viewPath = viewResolver(mv.getViewName());
+				View view = new View(viewPath);
+				view.render(mv.getModel(), request, response);
+			}else {
+				System.out.println("insert post method in");
+				Board board = new Board();
+				board.setTitle(request.getParameter("title"));
+				board.setMem_id(request.getParameter("mem_id"));
+				board.setContents(request.getParameter("contents"));
+				boardService.insert(board);
+				System.out.println("[Add] new board");
+				response.sendRedirect("/board/list?page=1");
+			}
+		}else if(com.equals("/update")) {
+			
 		}
 	}
 

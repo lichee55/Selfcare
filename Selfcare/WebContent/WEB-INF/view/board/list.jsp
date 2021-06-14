@@ -31,8 +31,6 @@
 			</tr>
 		</c:forEach>
 	</table>
-	<form action="/shop/front/board/join" method="get">
-		<button type="submit" name="register">등록</button>
-	</form>
+	<a href="/board/insert" method="GET">새 글 작성</a>
 </body>
 </html>
