@@ -12,6 +12,10 @@ public class Member {
 		this.password = password;
 	}
 
+	public Member() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public String getMem_Id() {
 		return mem_Id;
 	}

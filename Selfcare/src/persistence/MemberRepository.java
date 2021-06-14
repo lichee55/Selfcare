@@ -90,4 +90,38 @@ public class MemberRepository {
 		}
 		return loginResult;
 	}
+	public Member getMember(String id) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Member member=new Member();
+		boolean loginResult = false;
+		String sql = "SELECT * FROM MEMBER WHERE MEM_ID = \'" +id + "\'";
+		try {
+			conn = ds.getConnection();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				member.setMem_Id(rs.getString("member_id"));
+				member.setPassword(rs.getString("password"));
+				member.setName(rs.getString("name"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return member;
+	}
 }
+
