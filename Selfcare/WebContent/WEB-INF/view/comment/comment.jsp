@@ -1,7 +1,7 @@
 <%@page import="java.util.List"%>
 <%@taglib prefix= "c" uri= "http://java.sun.com/jsp/jstl/core" %>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,17 +10,22 @@
 </head>
 <body>
 	<form action="comment" method="post">
-		<c:forEach var="comment" items="${comments}">
-			<tr>
-				<td>${comment.mem_id}</td>
-				<td>${comment.regdate}</td>
-				<td>${comment.contents}</td>
-				<td colspan=2 align="center"><input type="submit" value="¼öÁ¤">
-				<td colspan=2 align="center"><input type="submit" value="»èÁ¦">
-			</tr>
-		</c:forEach>
-		<td><textarea rows="7" cols="50" name="comment_content"></textarea>
-		<td colspan=2 align="center"><input type="submit" value="ÀúÀå">
+		<table>
+			<c:forEach var="comment" items="${comments}">
+				<tr>
+					<td>${comment.mem_id}</td>
+					<td>${comment.regdate}</td>
+					<td>${comment.contents}</td>
+					<td colspan=2 align="center"><input type="submit" value="ìˆ˜ì •" onclick="location.href='commentFooter.jsp'">
+					<td colspan=2 align="center"><input type="submit" value="ì‚­ì œ">
+				</tr>
+			</c:forEach>
+		</table>
+		
+		<!-- <td><textarea rows="7" cols="50" name="comment_content"></textarea></td>
+		<td colspan=2 align="center"><input type="submit" value="ì €ìž¥"></td>
+		-->
+		<jsp:include page= "commentFooter.jsp"/>
 	</form>
 </body>
 </html>
