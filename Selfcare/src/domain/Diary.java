@@ -16,6 +16,10 @@ public class Diary {
 		this.regdate = regdate;
 	}
 
+	public Diary() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public int getDiary_Id() {
 		return diary_Id;
 	}

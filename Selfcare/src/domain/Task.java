@@ -8,14 +8,16 @@ public class Task {
 	private String contents; // 내용
 	private int clear; // 수행여부
 	private String mem_Id;
+	private LocalDateTime taskdate;
 
-	public Task(int task_Id, LocalDateTime regdate, String contents, int clear, String mem_Id) {
+	public Task(int task_Id, LocalDateTime regdate, String contents, int clear, String mem_Id, LocalDateTime taskdate) {
 		super();
 		this.task_Id = task_Id;
 		this.regdate = regdate;
 		this.contents = contents;
 		this.clear = clear;
 		this.mem_Id = mem_Id;
+		this.taskdate = taskdate;
 	}
 
 	public int getTask_Id() {
@@ -56,5 +58,13 @@ public class Task {
 
 	public void setMem_Id(String mem_Id) {
 		this.mem_Id = mem_Id;
+	}
+
+	public LocalDateTime getTaskdate() {
+		return taskdate;
+	}
+
+	public void setTaskdate(LocalDateTime taskdate) {
+		this.taskdate = taskdate;
 	}
 }
