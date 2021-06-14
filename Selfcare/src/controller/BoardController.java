@@ -39,7 +39,7 @@ public class BoardController extends HttpServlet {
 				response.sendRedirect("/board/list?page=1");
 				return;
 			}
-			if(Integer.parseInt(boardPage)<1) {
+			if (Integer.parseInt(boardPage) < 1) {
 				System.out.println("invalid page param");
 				response.sendRedirect("/board/list?page=1");
 				return;
@@ -51,27 +51,53 @@ public class BoardController extends HttpServlet {
 			String viewPath = viewResolver(mv.getViewName());
 			View view = new View(viewPath);
 			view.render(mv.getModel(), request, response);
-			
-		}else if(com.equals("/insert")) {
-			if(request.getMethod().equals("GET")) {
+
+		} else if (com.equals("/insert")) {
+			if (request.getMethod().equals("GET")) {
 				System.out.println("insert get method in");
 				ModelAndView mv = new ModelAndView();
 				mv.setViewName("insert");
 				String viewPath = viewResolver(mv.getViewName());
 				View view = new View(viewPath);
 				view.render(mv.getModel(), request, response);
-			}else {
+			} else {
 				System.out.println("insert post method in");
 				Board board = new Board();
 				board.setTitle(request.getParameter("title"));
 				board.setMem_id(request.getParameter("mem_id"));
 				board.setContents(request.getParameter("contents"));
 				boardService.insert(board);
-				System.out.println("[Add] new board");
+				System.out.println("[Insert] board");
 				response.sendRedirect("/board/list?page=1");
 			}
-		}else if(com.equals("/update")) {
-			
+		} else if (com.equals("/update")) {
+			if (request.getMethod().equals("GET")) {
+				System.out.println("update get method in");
+				ModelAndView mv = new ModelAndView();
+				mv.setViewName("update");
+				String viewPath = viewResolver(mv.getViewName());
+				View view = new View(viewPath);
+				view.render(mv.getModel(), request, response);
+			} else {
+				System.out.println("update post method in");
+				Board board = new Board();
+				board.setBoard_Id(Integer.parseInt(request.getParameter("board_id")));
+				board.setTitle(request.getParameter("title"));
+				board.setMem_id(request.getParameter("mem_id"));
+				board.setContents(request.getParameter("contents"));
+				boardService.update(board);
+				System.out.println("[Update] board");
+				response.sendRedirect("/board/list?page=1");
+			}
+		} else if (com.equals("/delete")) {
+			if (request.getMethod().equals("POST")) {
+				int board_id = Integer.parseInt(request.getParameter("board_id"));
+				Board board = new Board();
+				board.setBoard_Id(board_id);
+				boardService.delete(board);
+				System.out.println("[Delete] board");
+				response.sendRedirect("/board/list?page=1");
+			}
 		}
 	}
 
