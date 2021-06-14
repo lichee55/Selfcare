@@ -42,7 +42,7 @@ public class TaskRepository {
 	public void save(Task task) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		String sql = "INSERT INTO task(content,clear,regdate,member_id) VALUE (?,?,now(),?)";
+		String sql = "INSERT INTO task(content,clear,regdate,member_id,isRemoved) VALUE (?,?,now(),?,0)";
 		try {
 			conn = ds.getConnection();
 		} catch (SQLException e) {
@@ -95,7 +95,7 @@ public class TaskRepository {
 	public void delete(Task task) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		String sql = "DELETE FROM task WHERE task_id=?";
+		String sql = "UPDATE task SET isRemoved=1 WHERE task_id=?";
 		try {
 			conn = ds.getConnection();
 		} catch (SQLException e) {
@@ -144,7 +144,8 @@ public class TaskRepository {
 				int clear = rs.getInt("clear");
 				String mem_id = rs.getString("member_id");
 				LocalDateTime taskdate = rs.getTimestamp("taskdate").toLocalDateTime();
-				Task task = new Task(task_id, regdate, contents, clear, mem_id, taskdate);
+				int isRemoved = rs.getInt("isRemoved");
+				Task task = new Task(task_id, regdate, contents, clear, mem_id, taskdate, isRemoved);
 				taskList.add(task);
 			}
 		} catch (SQLException e) {
