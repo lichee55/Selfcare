@@ -5,12 +5,14 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import domain.Member;
 import domain.Task;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.sql.Connection;
@@ -89,11 +91,11 @@ public class TaskRepository {
 			}
 		}
 	}
-	
+
 	public void delete(Task task) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		String sql = "DELETE FROM task WHERE id=?";
+		String sql = "DELETE FROM task WHERE task_id=?";
 		try {
 			conn = ds.getConnection();
 		} catch (SQLException e) {
@@ -114,11 +116,48 @@ public class TaskRepository {
 			}
 		}
 	}
-	
-	public ArrayList<Task> findTaskByDate(LocalDateTime time){
-		ArrayList<Task> taskList=new ArrayList<Task>();
-		
-		
+
+	public ArrayList<Task> findTaskByDate(LocalDateTime time, Member member) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<Task> taskList = new ArrayList<Task>();
+		LocalDateTime minusTwoDay = time.minusDays(3);
+		LocalDateTime plusTwoDay = time.plusDays(3);
+		String sql = "SELECT * FROM task WHERE member_id=? and taskdate>? and taskdate<?";
+		try {
+			conn = ds.getConnection();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, member.getMem_Id());
+			pstmt.setTimestamp(2, Timestamp.valueOf(minusTwoDay));
+			pstmt.setTimestamp(3, Timestamp.valueOf(plusTwoDay));
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				int task_id = rs.getInt("task_id");
+				LocalDateTime regdate = rs.getTimestamp("regdate").toLocalDateTime();
+				String contents = rs.getString("content");
+				int clear = rs.getInt("clear");
+				String mem_id = rs.getString("member_id");
+				LocalDateTime taskdate = rs.getTimestamp("taskdate").toLocalDateTime();
+				Task task = new Task(task_id, regdate, contents, clear, mem_id, taskdate);
+				taskList.add(task);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 		return taskList;
 	}
 }
