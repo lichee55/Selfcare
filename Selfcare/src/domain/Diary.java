@@ -3,13 +3,15 @@ package domain;
 import java.time.LocalDateTime;
 
 public class Diary {
-	private int diary_Id;//일기아이디
-	private int mem_Id;	//맴버아이디
-	private LocalDateTime regdate;	//날짜
-	
-	public Diary(int diary_Id, int mem_Id, LocalDateTime regdate) {
+	private int diary_Id;// 일기아이디
+	private String content; // 내용
+	private String mem_Id; // 맴버아이디
+	private LocalDateTime regdate; // 날짜
+
+	public Diary(int diary_Id, String content, String mem_Id, LocalDateTime regdate) {
 		super();
 		this.diary_Id = diary_Id;
+		this.content = content;
 		this.mem_Id = mem_Id;
 		this.regdate = regdate;
 	}
@@ -22,11 +24,11 @@ public class Diary {
 		this.diary_Id = diary_Id;
 	}
 
-	public int getMem_Id() {
+	public String getMem_Id() {
 		return mem_Id;
 	}
 
-	public void setMem_Id(int mem_Id) {
+	public void setMem_Id(String mem_Id) {
 		this.mem_Id = mem_Id;
 	}
 
@@ -37,5 +39,13 @@ public class Diary {
 	public void setRegdate(LocalDateTime regdate) {
 		this.regdate = regdate;
 	}
-	
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
 }

@@ -1,22 +1,22 @@
 package domain;
 
 public class Member {
-	private int mem_Id;
+	private String mem_Id;
 	private String name;
 	private String password;
-	
-	public Member(int mem_Id, String name, String password) {
+
+	public Member(String mem_Id, String name, String password) {
 		super();
 		this.mem_Id = mem_Id;
 		this.name = name;
 		this.password = password;
 	}
 
-	public int getMem_Id() {
+	public String getMem_Id() {
 		return mem_Id;
 	}
 
-	public void setMem_Id(int mem_Id) {
+	public void setMem_Id(String mem_Id) {
 		this.mem_Id = mem_Id;
 	}
 
@@ -35,5 +35,4 @@ public class Member {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-		
 }
