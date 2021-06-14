@@ -1,19 +1,22 @@
 package controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import service.MainService;
+@WebServlet(name="mainController", urlPatterns = "/main/*")
+public class MainController extends HttpServlet{
 
-public class MainController implements Controller {
-	
-	private final MainService mainService = new MainService();
+	private Map<String, Controller> controllerMap = new HashMap<>();
+
+	public MainController() {
+	}
 	
 }
