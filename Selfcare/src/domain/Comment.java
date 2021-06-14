@@ -8,14 +8,16 @@ public class Comment {
 	private LocalDateTime regdate;// 날짜
 	private String mem_id; // 작성자
 	private int board_Id; // 게시판아이디
+	private int isRemoved; // 삭제여부
 
-	public Comment(int comment_Id, String contents, LocalDateTime regdate, String writer, int board_Id) {
+	public Comment(int comment_Id, String contents, LocalDateTime regdate, String writer, int board_Id, int isRemoved) {
 		super();
 		this.comment_Id = comment_Id;
 		this.contents = contents;
 		this.regdate = regdate;
 		this.mem_id = writer;
 		this.board_Id = board_Id;
+		this.isRemoved = isRemoved;
 	}
 
 	public int getComment_Id() {
@@ -58,4 +60,13 @@ public class Comment {
 		this.board_Id = board_Id;
 	}
 
+	public int getIsRemoved() {
+		return isRemoved;
+	}
+
+	public void setIsRemoved(int isRemoved) {
+		this.isRemoved = isRemoved;
+	}
+
+	
 }

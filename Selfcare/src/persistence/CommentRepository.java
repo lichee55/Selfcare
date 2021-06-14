@@ -94,7 +94,7 @@ public class CommentRepository {
 	public void delete(Comment comment) {
 		Connection conn=null;
 		PreparedStatement pstmt=null;
-		String sql = "DELETE FROM COMMENT WHERE comment_id=?,member_id=?";
+		String sql = "UPDATE COMMENT SET isRemoved = 1 " + "WHERE comment_id=?";
 		try {
 			conn=ds.getConnection();
 		}catch(SQLException e) {
@@ -102,8 +102,7 @@ public class CommentRepository {
 		}
 		try {
 			pstmt=conn.prepareStatement(sql);
-			pstmt.setInt(1, comment.getComment_Id());
-			pstmt.setString(2,comment.getMem_id());
+			pstmt.setInt(1,comment.getComment_Id());
 			int n = pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -117,11 +116,11 @@ public class CommentRepository {
 		}
 	}
 	
-	public ArrayList<Comment> findAll(){
+	public ArrayList<Comment> findAll(Comment comment){
 		Connection conn=null;
-		Statement st = null;
+		PreparedStatement pstmt = null;
 		ResultSet rs =null;
-		String sql = "SELECT * FROM COMMENT";
+		String sql = "SELECT * FROM COMMENT WHERE board_id=?, isRemoved = 0";
 		ArrayList<Comment> comments = new ArrayList<Comment>();
 		try {
 			conn=ds.getConnection();
@@ -129,15 +128,17 @@ public class CommentRepository {
 			e.printStackTrace();
 		}
 		try {
-			st=conn.createStatement();
-			rs=st.executeQuery(sql);
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, comment.getBoard_Id());
+			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				int comment_id=rs.getInt("comment_id");
 				String content=rs.getString("content");
 				LocalDateTime regdate=rs.getTimestamp("regdate").toLocalDateTime();
 				String member_id=rs.getString("member_id");
-				int board_id = rs.getInt("board_id");
-				Comment coms = new Comment(comment_id,content,regdate,member_id,board_id);
+				int board_ids = rs.getInt("board_id");
+				int isRemoved = 0;
+				Comment coms = new Comment(comment_id,content,regdate,member_id,board_ids,isRemoved);
 				comments.add(coms);
 			}
 		}catch(SQLException e) {
@@ -145,7 +146,7 @@ public class CommentRepository {
 		}finally {
 			try {
 				rs.close();
-				st.close();
+				pstmt.close();
 				conn.close();
 			}catch(SQLException e) {
 				e.printStackTrace();
