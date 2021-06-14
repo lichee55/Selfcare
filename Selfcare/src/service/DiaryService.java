@@ -21,10 +21,10 @@ public class DiaryService {
 	public void delete(Diary diary) {		
 		diaryRepository.delete(diary);
 	}
-	public ArrayList<Board> findBoards(int pageNum) {
+	public ArrayList<Diary> findBoards(int pageNum) {
         return diaryRepository.findDiaryByPage(pageNum);
     }
-	public Board findById(int input) {
-        return diaryRepository.findById(input);
+	public Diary findById(int input) {
+        return diaryRepository.findDiaryById(input);
     }
 }
