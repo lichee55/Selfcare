@@ -57,12 +57,13 @@ public class MemberRepository {
 			}
 		}
 	}
+	
 	public boolean logIn(Member member) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		boolean loginResult = false;
-		String sql = "SELECT PASSWORD FROM MEMBER WHERE MEM_ID = \'" +member.getMem_Id() + "\'";
+		String sql = "SELECT password FROM MEMBER WHERE MEM_ID = \'" +member.getMem_Id() + "\'";
 		try {
 			conn = ds.getConnection();
 		}catch(SQLException e) {
@@ -70,7 +71,6 @@ public class MemberRepository {
 		}
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, member.getMem_Id());
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				if(rs.getString(1).equals(member.getPassword())){

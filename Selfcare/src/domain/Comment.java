@@ -9,7 +9,7 @@ public class Comment {
 	private String mem_id; // 작성자
 	private int board_Id; // 게시판아이디
 
-	public Comment(int comment_Id, String contents, LocalDateTime regdate, String writer, int boardId, int board_Id) {
+	public Comment(int comment_Id, String contents, LocalDateTime regdate, String writer, int board_Id) {
 		super();
 		this.comment_Id = comment_Id;
 		this.contents = contents;
