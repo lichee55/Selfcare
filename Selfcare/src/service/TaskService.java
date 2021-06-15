@@ -49,7 +49,6 @@ public class TaskService {
 			duringTasks.add(daytasks);
 			minTime = minTime.plusDays(1);
 		}
-		i++;
 		for (; i < 5; i++) {
 			ArrayList<Task> daytasks = new ArrayList<Task>();
 			duringTasks.add(daytasks);

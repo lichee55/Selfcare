@@ -58,8 +58,6 @@ public class TaskController extends HttpServlet {
 			mv.getModel().put("task3", tasks.get(3));
 			mv.getModel().put("task4", tasks.get(4));
 
-			System.out.println(tasks.get(2).get(0).getContents());
-
 			String viewPath = viewResolver(mv.getViewName());
 			View view = new View(viewPath);
 			view.render(mv.getModel(), request, response);
