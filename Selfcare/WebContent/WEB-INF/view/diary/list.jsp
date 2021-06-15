@@ -19,20 +19,17 @@
 				<td>조회수</td>
 			</tr>
 		</thead>		
-		<c:forEach var="board" items="${boards}">
+		<c:forEach var="diary" items="${diarys}">
 			<tr>
-				<td>${board.board_Id}</td>
+				<td><a href="detail?id=${diary.diary_Id}">${diary.diary_Id}</td>
 				<!--게시글 조회를 위한 href는 query string 사용, method = GET
 				href는 상대경로 사용 -> 현재경로 board/board-list, 요청경로 board/detail + request parameter -->								
-				<td><a href="detail?id=${board.board_Id}">${board.title}</a></td>								
-				<td>${board.mem_id}</td>
-				<td>${board.regdate}</td>
-				<td>${board.hit}</td>
+				<td>${diary.content}</a></td>								
+				<td>${diary.mem_id}</td>
+				<td>${diary.regdate}</td>
 			</tr>
 		</c:forEach>
 	</table>
-	<form action="/shop/front/board/join" method="get">
-		<button type="submit" name="register">등록</button>
-	</form>
+	<a href="/board/insert" method="GET">새 글 작성</a>
 </body>
 </html>

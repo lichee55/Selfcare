@@ -21,8 +21,8 @@ public class DiaryService {
 	public void delete(Diary diary) {		
 		diaryRepository.delete(diary);
 	}
-	public ArrayList<Diary> findBoards(int pageNum) {
-        return diaryRepository.findDiaryByPage(pageNum);
+	public ArrayList<Diary> findBoards(int pageNum, String memberId) {
+        return diaryRepository.findDiaryByPage(pageNum, memberId);
     }
 	public Diary findById(int input) {
         return diaryRepository.findDiaryById(input);
