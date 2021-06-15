@@ -12,6 +12,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import domain.Board;
 import domain.Diary;
 
 public class DiaryRepository {
@@ -138,7 +139,39 @@ public class DiaryRepository {
 		}		
 		return diary;
 	}
-	
+	public int findNum(){
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int idRe=0;
+		String sql = "SELECT COUNT(*) FROM DIARY";
+		try {
+			conn = ds.getConnection();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery(sql);
+			if (rs.next()) {
+				idRe=rs.getInt("count(*)");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}			
+		}		
+		return idRe;
+	}
 	public ArrayList<Diary> findDiaryByPage(int pageNum, String memberId) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -180,6 +213,7 @@ public class DiaryRepository {
 		}		
 		return diaryList;
 	}
+
 		
 
 }
