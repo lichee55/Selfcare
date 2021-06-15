@@ -124,7 +124,7 @@ public class TaskRepository {
 		ArrayList<Task> taskList = new ArrayList<Task>();
 		LocalDateTime minusTwoDay = time.minusDays(6);
 		LocalDateTime plusTwoDay = time.plusDays(6);
-		String sql = "SELECT * FROM task WHERE member_id=? and taskdate>? and taskdate<? ORDER BY taskdate";
+		String sql = "SELECT * FROM task WHERE member_id=? and isRemoved=0 and taskdate>? and taskdate<? ORDER BY taskdate";
 		try {
 			conn = ds.getConnection();
 		} catch (SQLException e) {

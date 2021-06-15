@@ -23,6 +23,10 @@ public class Task {
 		this.isRemoved = isRemoved;
 	}
 
+	public Task() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public int getTask_Id() {
 		return task_Id;
 	}

@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import domain.Board;
 import domain.Member;
 import domain.Task;
 import service.TaskService;
@@ -61,6 +62,32 @@ public class TaskController extends HttpServlet {
 			String viewPath = viewResolver(mv.getViewName());
 			View view = new View(viewPath);
 			view.render(mv.getModel(), request, response);
+		} else if (com.equals("/delete")) {
+			if (request.getMethod().equals("POST")) {
+				System.out.println("post delete task");
+				String taskId = request.getParameter("task_id");
+				System.out.println(taskId);
+				Task task = new Task(0, null, null, 0, null, null, 0);
+				task.setTask_Id(Integer.parseInt(taskId));
+				taskService.delete(task);
+				response.sendRedirect("/task/");
+			}
+		} else if (com.equals("/insert")) {
+			if (request.getMethod().equals("GET")) {
+				ModelAndView mv = new ModelAndView();
+				mv.setViewName("insert");
+				String viewPath = viewResolver(mv.getViewName());
+				View view = new View(viewPath);
+				view.render(mv.getModel(), request, response);
+			} else {
+				HttpSession httpsession = request.getSession();
+				Member member = (Member) httpsession.getAttribute("member");
+				Task task = new Task();
+				task.setContents(request.getParameter("title"));
+				task.setMem_Id(member.getMem_Id());
+				taskService.insert(task);
+				response.sendRedirect("/task/");
+			}
 		}
 	}
 
