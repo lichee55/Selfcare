@@ -21,13 +21,14 @@
 		</thead>		
 		<c:forEach var="diary" items="${diarys}">
 			<tr>
-				<td><a href="detail?id=${diary.diary_Id}">${diary.diary_Id}</td>
+				<td>${diary.diary_Id}</td>
 				<!--게시글 조회를 위한 href는 query string 사용, method = GET
 				href는 상대경로 사용 -> 현재경로 board/board-list, 요청경로 board/detail + request parameter -->								
 				<td>${diary.content}</a></td>								
 				<td>${diary.mem_id}</td>
 				<td>${diary.regdate}</td>
-			</tr>
+				<td><input type="submit" value="수정" method="get" onclick="javascript: form.action='/diary/update?id=${diary.diary_Id}';"/></td>
+				<td><input type="submit" value="삭제" method="post" onclick="javascript: form.action='/diary/delete';"/></td>
 		</c:forEach>
 	</table>
 	<div align="center">
