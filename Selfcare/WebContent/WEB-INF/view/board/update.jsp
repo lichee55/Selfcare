@@ -1,32 +1,32 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
 
 	<form method="post">
 		<input type="hidden" value=${board.board_Id} name="board_id">
-		<label for="uname"><b>Á¦¸ñ</b></label> 
+		<label for="uname"><b>ì œëª©</b></label> 
 		<input type="text" value=${board.title} name="title">
 		<br>
-		<label for="uname"><b>³»¿ë</b></label> 
+		<label for="uname"><b>ë‚´ìš©</b></label> 
 		<textarea type="text" name="contents" rows=10>${board.contents}</textarea>
 		<br>
-		<label for="uname"><b>ÀÛ¼ºÀÚ</b></label> 
+		<label for="uname"><b>ì‘ì„±ì</b></label> 
 		<input type="text" value=${board.mem_id} name="mem_id" readonly>
 		<br>
-		<label for="uname"><b>°Ô½ÃÀÏ</b></label> 
+		<label for="uname"><b>ê²Œì‹œì¼</b></label> 
 		<input type="text" value=${board.regdate} name="regdate" readonly>
 		<br>
-		<label for="uname"><b>Á¶È¸¼ö</b></label> 
+		<label for="uname"><b>ì¡°íšŒìˆ˜</b></label> 
 		<input type="text" value=${board.hit} name="hit" readonly>
 		<br>
-		<input type="submit" value="¼öÁ¤" onclick="javascript: form.action='/board/update';"/>
-		<input type="submit" value="»èÁ¦" onclick="javascript: form.action='/board/delete';"/>
+		<input type="submit" value="ìˆ˜ì •" onclick="javascript: form.action='/board/update';"/>
+		<input type="submit" value="ì‚­ì œ" onclick="javascript: form.action='/board/delete';"/>
 	</form>
  
 </body>
