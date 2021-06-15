@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
@@ -13,7 +13,7 @@
 		<input type = "hidden" value="${comment.board_Id}" name="board_id">
 		<input type = "hidden" value="${comment.mem_id}" name="member_id">
 		<td><textarea rows="7" cols="50" name="content">${comment.contents}</textarea></td>
-		<button type="submit" value="¼öÁ¤" onclick="javascript: form.action='/board/detail?id=${board.board_Id}">¼öÁ¤</button>
+		<button type="submit" value="ìˆ˜ì •" onclick="javascript: form.action='/board/detail?id=${board.board_Id}">ìˆ˜ì •</button>
 	</form>
 </body>
 </html>

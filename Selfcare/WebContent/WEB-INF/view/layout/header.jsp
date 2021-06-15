@@ -1,9 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
         html,body{
@@ -123,26 +123,26 @@
 
         <div id="mySidenav" class="sidenav">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-            <a href="#">¿œ±‚</a>
-            <a href="#">«“ ¿œ</a>
-            <a href="#">∞‘Ω√∆«</a>
-            <a href="#">∑Œ±◊¿Œ</a>
+            <a href="#">ÏùºÍ∏∞</a>
+            <a href="#">Ìï† Ïùº</a>
+            <a href="#">Í≤åÏãúÌåê</a>
+            <a href="#">Î°úÍ∑∏Ïù∏</a>
         </div>
         <span id="span-side" style="font-size: 30px; cursor: pointer" onclick="openNav()">&#9776;</span>
 
         <div id="top-menu">
             <ul class="navbar-nav">
                 <li>
-                    <a href="#" class="active">¿œ±‚</a>
+                    <a href="#" class="active">ÏùºÍ∏∞</a>
                 </li>
                 <li>
-                    <a href="#" class="active">«“ ¿œ</a>
+                    <a href="#" class="active">Ìï† Ïùº</a>
                 </li>
                 <li>
-                    <a href="#" class="active">∞‘Ω√∆«</a>
+                    <a href="#" class="active">Í≤åÏãúÌåê</a>
                 </li>
                 <li>
-                    <a href="#" class="active">∑Œ±◊¿Œ</a>
+                    <a href="#" class="active">Î°úÍ∑∏Ïù∏</a>
                 </li>
             </ul>
         </div>
