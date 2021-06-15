@@ -1,23 +1,19 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
 	<form method="post">
-		<label for="uname"><b>Á¦¸ñ</b></label> 
-		<input type="text" name="title">
-		<label for="uname"><b>ÀÛ¼ºÀÚ</b></label>
-		<input type="text" name="mem_id">
+		<label for="uname"><b>ì œëª©</b></label> <input type="text" name="title">
+		<br> <label for="uname"><b>ë‚´ìš©</b></label>
+		<textarea type="text" name="contents" rows=10></textarea>
 		<br>
-		<label for="uname"><b>³»¿ë</b></label> 
-		<textarea type="text" name="contents" rows=10 ></textarea>
-		<br>
-		<button type="submit">µî·Ï</button>
+		<button type="submit">ë“±ë¡</button>
 	</form>
-	
+
 </body>
 </html>
