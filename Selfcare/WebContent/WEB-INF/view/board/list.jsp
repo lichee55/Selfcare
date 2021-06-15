@@ -32,7 +32,7 @@
 		</c:forEach>
 	</table>
 	<div align="center">
-		<c:forEach var="cnt" begin="1" end="${boards.size()/10+3}">
+		<c:forEach var="cnt" begin="1" end="${totalPage}">
 			<a href="list?page=${cnt}">${cnt}</a>
 		</c:forEach>
 	</div>

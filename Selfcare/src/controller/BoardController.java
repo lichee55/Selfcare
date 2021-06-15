@@ -45,9 +45,11 @@ public class BoardController extends HttpServlet {
 				return;
 			}
 			ArrayList<Board> boards = boardService.findBoards(Integer.parseInt(boardPage));
+			int number = boardService.findNum();
 			ModelAndView mv = new ModelAndView();
 			mv.setViewName("list");
 			mv.getModel().put("boards", boards);
+			mv.getModel().put("totalPage", number);
 			String viewPath = viewResolver(mv.getViewName());
 			View view = new View(viewPath);
 			view.render(mv.getModel(), request, response);
