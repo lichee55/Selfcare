@@ -9,11 +9,19 @@ import persistence.MemberRepository;
 
 public class MemberService {
 	private final MemberRepository memberRepository = MemberRepository.getInstance();
-	public MemberService() {}
+
+	public MemberService() {
+	}
+
 	public void signUp(Member member) {
 		memberRepository.save(member);
 	}
+
 	public boolean logIn(Member member) {
 		return memberRepository.logIn(member);
+	}
+
+	public Member findMemberById(String member) {
+		return memberRepository.getMember(member);
 	}
 }
