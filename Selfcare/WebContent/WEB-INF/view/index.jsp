@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<jsp:include page= "./layout/header.jsp"/>
  ^^ㅣ 발
  <a href="/main/login">로그인화면</a>
  <a href="/board/list">게시판화면</a>
