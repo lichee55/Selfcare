@@ -75,6 +75,8 @@ public class BoardController extends HttpServlet {
 				System.out.println("update get method in");
 				ModelAndView mv = new ModelAndView();
 				mv.setViewName("update");
+				Board board=boardService.findById(Integer.parseInt(request.getParameter("board_id")));
+				mv.getModel().put("board", board);
 				String viewPath = viewResolver(mv.getViewName());
 				View view = new View(viewPath);
 				view.render(mv.getModel(), request, response);
@@ -98,6 +100,15 @@ public class BoardController extends HttpServlet {
 				System.out.println("[Delete] board");
 				response.sendRedirect("/board/list?page=1");
 			}
+		} else if (com.equals("/detail")) {
+			int board_id = Integer.parseInt(request.getParameter("id"));
+			Board board = boardService.findById(board_id);
+			ModelAndView mv = new ModelAndView();
+			mv.setViewName("detail");
+			mv.getModel().put("board", board);
+			String viewPath = viewResolver(mv.getViewName());
+			View view = new View(viewPath);
+			view.render(mv.getModel(), request, response);
 		}
 	}
 

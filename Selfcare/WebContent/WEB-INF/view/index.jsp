@@ -8,5 +8,7 @@
 </head>
 <body>
  ^^ㅣ 발
+ <a href="/main/login">로그인화면</a>
+ <a href="/board/list">게시판화면</a>
 </body>
 </html>

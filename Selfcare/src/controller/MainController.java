@@ -36,6 +36,7 @@ public class MainController extends HttpServlet {
 			ModelAndView mv = new ModelAndView();
 			mv.setViewName("index");
 			String viewPath = viewResolver(mv.getViewName());
+			System.out.println(viewPath);
 			View view = new View(viewPath);
 			view.render(mv.getModel(), request, response);
 		} else if (com.equals("/login")) {
@@ -43,6 +44,7 @@ public class MainController extends HttpServlet {
 				ModelAndView mv = new ModelAndView();
 				mv.setViewName("login");
 				String viewPath = viewResolver(mv.getViewName());
+				System.out.println(viewPath);
 				View view = new View(viewPath);
 				view.render(mv.getModel(), request, response);
 			} else {
@@ -55,9 +57,10 @@ public class MainController extends HttpServlet {
 					response.sendRedirect("/main/login");
 					return;
 				}
-				// Member mem = memberService.findMember(mem_id);
+				Member mem = memberService.findMemberById(mem_id);
 				HttpSession httpsession = request.getSession();
-				// httpsession.setAttribute("member", mem);
+				httpsession.setAttribute("member", mem);
+				response.sendRedirect("/main/index");
 			}
 		} else {
 			response.sendRedirect("/main/index");

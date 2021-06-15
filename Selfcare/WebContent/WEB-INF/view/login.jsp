@@ -7,12 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form method="post">
-		<label for="uname"><b>내용</b></label> 
-		<textarea type="text" name="contents" rows=10 ></textarea>
-		<br>
-		<button type="submit">등록</button>
+	<form action=login method="post">
+		<input type="text" name="mem_id" />
+		<input type="password" name="password" />
+		<input type="submit" value="로그인">
 	</form>
-	
 </body>
 </html>
