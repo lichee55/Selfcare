@@ -23,9 +23,9 @@
 			<input type="text" value=${board.hit} name="hit" readonly>
 			<br>
 	<form method="get">
-		<input type="hidden" value=${board.board_Id} name="board_Id">
+		<input type="hidden" value=${board.board_Id} name="board_id">
 			
-		<input type="submit" value="수정" onclick="javascript: form.action='/board/board/update?id=${board.board_Id}';"/>
+		<input type="submit" value="수정" onclick="javascript: form.action='/board/update?id=${board.board_Id}';"/>
 	</form>
 </body>
 </html>
