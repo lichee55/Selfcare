@@ -8,9 +8,6 @@
 </head>
 <body>
 <jsp:include page= "./layout/header.jsp"/>
- ^^ㅣ 발
- <a href="/main/login">로그인화면</a>
- <a href="/board/list">게시판화면</a>
- <a href="/task/">작업화면</a>
+	메인화면입니다.
 </body>
 </html>
