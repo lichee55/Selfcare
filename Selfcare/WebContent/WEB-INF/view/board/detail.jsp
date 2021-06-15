@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<jsp:include page= "../layout/header.jsp"/>
 	<label for="uname"><b>제목</b></label> 
 			<input type="text" value=${board.title} name="title" readonly>
 			<br>

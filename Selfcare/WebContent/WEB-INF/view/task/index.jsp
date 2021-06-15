@@ -9,6 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<jsp:include page= "../layout/header.jsp"/>
 	<br />½Ã¹ß
 	<br />
 	<c:forEach var="tasks0" items="${task0}" varStatus="status">
