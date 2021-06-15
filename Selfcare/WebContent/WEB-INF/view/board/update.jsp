@@ -28,6 +28,6 @@
 		<input type="submit" value="수정" onclick="javascript: form.action='/board/update';"/>
 		<input type="submit" value="삭제" onclick="javascript: form.action='/board/delete';"/>
 	</form>
-
+ 
 </body>
 </html>

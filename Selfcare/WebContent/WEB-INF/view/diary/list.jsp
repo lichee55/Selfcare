@@ -30,6 +30,11 @@
 			</tr>
 		</c:forEach>
 	</table>
+	<div align="center">
+		<c:forEach var="cnt" begin="1" end="${diarys.size()/10+3}">
+			<a href="list?page=${cnt}">${cnt}</a>
+		</c:forEach>
+	</div>
 	<a href="/board/insert" method="GET">새 글 작성</a>
 </body>
 </html>
