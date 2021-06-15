@@ -27,12 +27,17 @@
 				<td>${diary.content}</a></td>
 				<td>${diary.mem_Id}</td>
 				<td>${diary.regdate}</td>
+<<<<<<< HEAD
 				<td><a href="/diary/update?id=${diary.diary_Id }" method="get">글 수정</a>
 				<input type="button" value="수정"
 					onclick="javascript: location.href='/diary/update?id=${diary.diary_Id}';" /></td>
 				<td><input type="button" value="삭제"
 					onclick="javascript: location.href='/diary/delete';" /></td>
 			</tr>
+=======
+				<td><input type="submit" value="수정" method="get" onclick="javascript: form.action='/diary/update?id=${diary.diary_Id}';"/></td>
+				<td><input type="submit" value="삭제" method="post" onclick="javascript: form.action='/diary/delete';"/></td>
+>>>>>>> branch 'main' of https://github.com/lichee55/Selfcare.git
 		</c:forEach>
 	</table>
 	<div align="center">
