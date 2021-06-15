@@ -24,7 +24,7 @@
             padding:0;
             display:inline-block;
             height:6.375rem;
-            background-color: #ff8d3f;
+            background-color: #50bcdf;
         }
 
         .navbar-brand{
@@ -40,6 +40,8 @@
             border:0;
             border-radius:0;
         }
+
+        
         #span-side{
             float:right;
         }
@@ -54,10 +56,10 @@
         #top-menu .navbar-nav>li>a{
             display:block;
             text-align:center;
-            height:100%;
+            height:50px;
             font-size:1rem;
             font-weight:700;
-            padding: 0 0 2.188rem 0;
+            padding: 0 0 0 0;
         }
 
         #top-menu ul>li{
@@ -100,6 +102,7 @@
         }
         .sidenav a{
             padding:8px 8px 8px 32px;
+            width:100px;
             font-size:25px;
             color:#818181;
             display:block;
@@ -118,31 +121,31 @@
 <body>
 	<div class="container">
         <h1 class="navbar-brand">
-            <a href="#" class="active">Self Care</a>
+            <a href="#" class="active" onmouseout="blackStyle(this)" onmouseover="redStyle(this)">Self Care</a>
         </h1>
 
         <div id="mySidenav" class="sidenav">
-            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-            <a href="#">일기</a>
-            <a href="#">할 일</a>
-            <a href="#">게시판</a>
-            <a href="#">로그인</a>
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()" onmouseout="grayStyle(this)" onmouseover="redStyle(this)">&times;</a>
+            <a href="#" onmouseout="grayStyle(this)" onmouseover="redStyle(this)">일기</a>
+            <a href="#" onmouseout="grayStyle(this)" onmouseover="redStyle(this)">할 일</a>
+            <a href="#" onmouseout="grayStyle(this)" onmouseover="redStyle(this)">게시판</a>
+            <a href="#" onmouseout="grayStyle(this)" onmouseover="redStyle(this)">로그인</a>
         </div>
-        <span id="span-side" style="font-size: 30px; cursor: pointer" onclick="openNav()">&#9776;</span>
+        <span id="span-side" style="font-size: 30px; cursor: pointer" onclick="openNav()" onmouseout="blackStyle(this)" onmouseover="redStyle(this)">&#9776;</span>
 
         <div id="top-menu">
             <ul class="navbar-nav">
                 <li>
-                    <a href="#" class="active">일기</a>
+                    <a href="#" class="active" onmouseout="blackStyle(this)" onmouseover="redStyle(this)">일기</a>
                 </li>
                 <li>
-                    <a href="#" class="active">할 일</a>
+                    <a href="#" class="active" onmouseout="blackStyle(this)" onmouseover="redStyle(this)">할 일</a>
                 </li>
                 <li>
-                    <a href="#" class="active">게시판</a>
+                    <a href="#" class="active" onmouseout="blackStyle(this)" onmouseover="redStyle(this)">게시판</a>
                 </li>
                 <li>
-                    <a href="#" class="active">로그인</a>
+                    <a href="#" class="active" onmouseout="blackStyle(this)" onmouseover="redStyle(this)">로그인</a>
                 </li>
             </ul>
         </div>
@@ -153,6 +156,16 @@
         }
         function closeNav(){
             document.getElementById("mySidenav").style.width="0"
+        }
+
+        function redStyle(x){
+            x.style.color="#ff0000";
+        }
+        function blackStyle(x){
+            x.style.color="#444444";
+        }
+        function grayStyle(x){
+            x.style.color="#818181";
         }
     </script>
 </body>
