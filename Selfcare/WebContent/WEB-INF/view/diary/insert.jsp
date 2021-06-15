@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,10 +8,10 @@
 </head>
 <body>
 	<form method="post">
-		<label for="uname"><b>≥ªøÎ</b></label> 
+		<label for="uname"><b>ÎÇ¥Ïö©</b></label> 
 		<textarea type="text" name="contents" rows=10 ></textarea>
 		<br>
-		<button type="submit">µÓ∑œ</button>
+		<button type="submit">Îì±Î°ù</button>
 	</form>
 	
 </body>

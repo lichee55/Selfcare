@@ -1,23 +1,23 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
 
 	<form method="post">
 		<input type="hidden" value=${diary.diary_Id} name="diary_id">
-		<label for="uname"><b>³»¿ë</b></label> 
+		<label for="uname"><b>ë‚´ìš©</b></label> 
 		<textarea type="text" name="contents" rows=10>${diary.contents}</textarea>
 		<br>
-		<label for="uname"><b>°Ô½ÃÀÏ</b></label> 
+		<label for="uname"><b>ê²Œì‹œì¼</b></label> 
 		<input type="text" value=${diary.regdate} name="regdate" readonly>
 		<br>
-		<input type="submit" value="¼öÁ¤" onclick="javascript: form.action='/diary/update';"/>
-		<input type="submit" value="»èÁ¦" onclick="javascript: form.action='/diary/delete';"/>
+		<input type="submit" value="ìˆ˜ì •" onclick="javascript: form.action='/diary/update';"/>
+		<input type="submit" value="ì‚­ì œ" onclick="javascript: form.action='/diary/delete';"/>
 	</form>
 
 </body>
