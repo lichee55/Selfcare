@@ -27,8 +27,9 @@
 				<td><a href="/diary/update?id=${diary.diary_Id }" method="get">글
 						수정</a></td>
 				<form method="post">
-					<input type="hidden" value="{diary.diary_Id}" name="diary_id">
-					<td><a href="/diary/delete}">글 삭제</a></td>
+					<input type="hidden" value="${diary.diary_Id}" name="diary_id">
+					<td><input type="submit" value="삭제"
+						onclick="javascript: form.action='/diary/delete';" /></td>
 				</form>
 			</tr>
 		</c:forEach>
