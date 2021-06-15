@@ -13,15 +13,7 @@
 		<label for="uname"><b>내용</b></label> 
 		<textarea type="text" name="contents" rows=10>${diary.content}</textarea>
 		<br>
-		<label for="uname"><b>게시일</b></label> 
-		<input type="text" value=${diary.regdate} name="regdate" readonly>
-		<br>
-<<<<<<< HEAD
-		<input type="submit" value="삭제" onclick="javascript: form.action='/diary/delete';"/>
-=======
 		<input type="submit" value="수정" onclick="javascript: form.action='/diary/update';"/>
->>>>>>> branch 'main' of https://github.com/lichee55/Selfcare.git
 	</form>
-
 </body>
 </html>
