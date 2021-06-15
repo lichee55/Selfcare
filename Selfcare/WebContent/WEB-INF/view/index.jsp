@@ -44,10 +44,25 @@
 .word-type01>strong {
 	font-size: 20px;
 }
+
+@media ( max-width :1100px) {
+	.background-self {
+		display: none;
+	}
+}
+
+@media ( min-width :1101px) {
+	.background-self {
+		display: block;
+	}
+}
 </style>
 </head>
 <body>
 	<jsp:include page="./layout/header.jsp" />
+	<div class="background-self">
+		<img src="SelfCareIMG.jpg" width=100%>
+	</div>
 	<div class="content-wrap">
 		<p class="introduce">
 			<strong>기능 소개</strong>
