@@ -7,11 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<fieldset disabled>
-	<legend>
-		<form method="get">
-			<input type="hidden" value=${board.board_Id} name="board_Id">
-			<label for="uname"><b>제목</b></label> 
+	<label for="uname"><b>제목</b></label> 
 			<input type="text" value=${board.title} name="title" readonly>
 			<br>
 			<label for="uname"><b>내용</b></label> 
@@ -26,9 +22,10 @@
 			<label for="uname"><b>조회수</b></label> 
 			<input type="text" value=${board.hit} name="hit" readonly>
 			<br>
-			<input type="submit" value="수정" onclick="javascript: form.action='/board/board/update?id=${board.board_Id}';"/>
-		</form>
-	</legend>
-</fieldset>
+	<form method="get">
+		<input type="hidden" value=${board.board_Id} name="board_Id">
+			
+		<input type="submit" value="수정" onclick="javascript: form.action='/board/board/update?id=${board.board_Id}';"/>
+	</form>
 </body>
 </html>
