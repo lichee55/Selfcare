@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<jsp:include page= "./layout/header.jsp"/>
 	<form action=login method="post">
 		<input type="text" name="mem_id" />
 		<input type="password" name="password" />

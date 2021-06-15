@@ -9,6 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<jsp:include page= "../layout/header.jsp"/>
 	<form action="comment" method="post">
 		<table border="3" align="center">
 			<c:forEach var="comment" items="${comments}">

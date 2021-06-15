@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	<jsp:include page= "../layout/header.jsp"/>
 	<form method="post">
 		<input type="hidden" value=${board.board_Id} name="board_id">
 		<label for="uname"><b>제목</b></label> 

@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	<jsp:include page= "../layout/header.jsp"/>
 	<form method="post">
 		<input type="hidden" value=${diary.diary_Id} name="diary_id">
 		<label for="uname"><b>내용</b></label> 
