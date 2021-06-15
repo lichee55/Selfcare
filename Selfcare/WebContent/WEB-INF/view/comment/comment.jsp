@@ -10,7 +10,7 @@
 </head>
 <body>
 	<form action="comment" method="post">
-		<table>
+		<table border="3">
 			<c:forEach var="comment" items="${comments}">
 				<tr>
 					<td>${comment.mem_id}</td>
