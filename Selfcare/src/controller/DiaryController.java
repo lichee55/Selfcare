@@ -14,13 +14,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import domain.Board;
+import domain.Diary;
 import domain.Member;
-import service.BoardService;
+import service.DiaryService;
 
-@WebServlet(name = "boardController", urlPatterns = "/board/*")
-public class BoardController extends HttpServlet {
+@WebServlet(name = "diaryController", urlPatterns = "/diary/*")
+public class DiaryController extends HttpServlet {
 
-	private final BoardService boardService = new BoardService();
+	private final DiaryService diaryService = new DiaryService();
 
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)
@@ -29,35 +30,36 @@ public class BoardController extends HttpServlet {
 		String conPath = request.getContextPath();
 		conPath += "/board";
 		String com = uri.substring(conPath.length());
-		System.out.println("============BoardController=============");
+		System.out.println("============DiaryController=============");
 		System.out.println("uri " + uri);
 		System.out.println("conPath " + conPath);
 		System.out.println("com " + com);
 
 		if (com.equals("/list")) {
-			String boardPage = request.getParameter("page");
-			if (boardPage == null) {
+			String diaryPage = request.getParameter("page");
+			if (diaryPage == null) {
 				System.out.println("no page param");
-				response.sendRedirect("/board/list?page=1");
+				response.sendRedirect("/diary/list?page=1");
 				return;
 			}
-			if (Integer.parseInt(boardPage) < 1) {
+			if (Integer.parseInt(diaryPage) < 1) {
 				System.out.println("invalid page param");
-				response.sendRedirect("/board/list?page=1");
+				response.sendRedirect("/diary/list?page=1");
 				return;
 			}
-			ArrayList<Board> boards = boardService.findBoards(Integer.parseInt(boardPage));
-			int number = boardService.findNum();
+			HttpSession httpsession = request.getSession();
+			Member member = (Member) httpsession.getAttribute("member");
+			ArrayList<Diary> diarys = diaryService.findBoards(Integer.parseInt(diaryPage), member.getMem_Id());
+			int number = diaryService.findNum(member.getMem_Id());
 			number = number / 10;
 			number++;
 			ModelAndView mv = new ModelAndView();
 			mv.setViewName("list");
-			mv.getModel().put("boards", boards);
+			mv.getModel().put("diarys", diarys);
 			mv.getModel().put("totalPage", number);
 			String viewPath = viewResolver(mv.getViewName());
 			View view = new View(viewPath);
 			view.render(mv.getModel(), request, response);
-
 		} else if (com.equals("/insert")) {
 			if (request.getMethod().equals("GET")) {
 				System.out.println("insert get method in");
@@ -70,59 +72,45 @@ public class BoardController extends HttpServlet {
 				System.out.println("insert post method in");
 				HttpSession httpsession = request.getSession();
 				Member member = (Member) httpsession.getAttribute("member");
-				Board board = new Board();
-				board.setTitle(request.getParameter("title"));
-				board.setMem_id(member.getMem_Id());
-				board.setContents(request.getParameter("contents"));
-				System.out.println(board.getTitle());
-				System.out.println(board.getContents());
-				boardService.insert(board);
-				System.out.println("[Insert] board");
-				response.sendRedirect("/board/list?page=1");
+				Diary diary = new Diary();
+				diary.setMem_Id(member.getMem_Id());
+				diary.setContent(request.getParameter("contents"));
+				diaryService.insert(diary);
+				System.out.println("[Insert] diary");
+				response.sendRedirect("/diary/list?page=1");
 			}
 		} else if (com.equals("/update")) {
 			if (request.getMethod().equals("GET")) {
 				System.out.println("update get method in");
 				ModelAndView mv = new ModelAndView();
 				mv.setViewName("update");
-				Board board = boardService.findById(Integer.parseInt(request.getParameter("board_id")));
-				mv.getModel().put("board", board);
+				Diary diary = diaryService.findById(Integer.parseInt(request.getParameter("id")));
+				mv.getModel().put("diary", diary);
 				String viewPath = viewResolver(mv.getViewName());
 				View view = new View(viewPath);
 				view.render(mv.getModel(), request, response);
 			} else {
 				System.out.println("update post method in");
-				Board board = new Board();
-				board.setBoard_Id(Integer.parseInt(request.getParameter("board_id")));
-				board.setTitle(request.getParameter("title"));
-				board.setMem_id(request.getParameter("mem_id"));
-				board.setContents(request.getParameter("contents"));
-				boardService.update(board);
-				System.out.println("[Update] board");
-				response.sendRedirect("/board/list?page=1");
+				Diary diary = new Diary();
+				diary.setDiary_Id(Integer.parseInt(request.getParameter("diary_id")));
+				diary.setContent(request.getParameter("contents"));
+				diaryService.update(diary);
+				System.out.println("[Update] diary");
+				response.sendRedirect("/diary/list?page=1");
 			}
 		} else if (com.equals("/delete")) {
 			if (request.getMethod().equals("POST")) {
-				int board_id = Integer.parseInt(request.getParameter("board_id"));
-				Board board = new Board();
-				board.setBoard_Id(board_id);
-				boardService.delete(board);
+				int board_id = Integer.parseInt(request.getParameter("diary_id"));
+				Diary diary = new Diary();
+				diary.setDiary_Id(board_id);
+				diaryService.delete(diary);
 				System.out.println("[Delete] board");
-				response.sendRedirect("/board/list?page=1");
+				response.sendRedirect("/diary/list?page=1");
 			}
-		} else if (com.equals("/detail")) {
-			int board_id = Integer.parseInt(request.getParameter("id"));
-			Board board = boardService.findById(board_id);
-			ModelAndView mv = new ModelAndView();
-			mv.setViewName("detail");
-			mv.getModel().put("board", board);
-			String viewPath = viewResolver(mv.getViewName());
-			View view = new View(viewPath);
-			view.render(mv.getModel(), request, response);
 		}
 	}
 
 	private String viewResolver(String viewName) {
-		return "/WEB-INF/view/board/" + viewName + ".jsp";
+		return "/WEB-INF/view/diary/" + viewName + ".jsp";
 	}
 }
