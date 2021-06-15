@@ -10,10 +10,11 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.annotation.WebInitParam;
 
-@WebFilter("/*")	
+@WebFilter(urlPatterns = { "/*" })
 public class CharacterEncodingFilter implements Filter {
-   
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {		
+
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+			throws IOException, ServletException {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 		chain.doFilter(request, response);

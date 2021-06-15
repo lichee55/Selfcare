@@ -11,8 +11,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import domain.Board;
+import domain.Member;
 import service.BoardService;
 
 @WebServlet(name = "boardController", urlPatterns = "/board/*")
@@ -45,7 +47,10 @@ public class BoardController extends HttpServlet {
 				return;
 			}
 			ArrayList<Board> boards = boardService.findBoards(Integer.parseInt(boardPage));
+			System.out.println(boards.get(0).getTitle());
 			int number = boardService.findNum();
+			number = number / 10;
+			number++;
 			ModelAndView mv = new ModelAndView();
 			mv.setViewName("list");
 			mv.getModel().put("boards", boards);
@@ -64,10 +69,14 @@ public class BoardController extends HttpServlet {
 				view.render(mv.getModel(), request, response);
 			} else {
 				System.out.println("insert post method in");
+				HttpSession httpsession = request.getSession();
+				Member member = (Member) httpsession.getAttribute("member");
 				Board board = new Board();
 				board.setTitle(request.getParameter("title"));
-				board.setMem_id(request.getParameter("mem_id"));
+				board.setMem_id(member.getMem_Id());
 				board.setContents(request.getParameter("contents"));
+				System.out.println(board.getTitle());
+				System.out.println(board.getContents());
 				boardService.insert(board);
 				System.out.println("[Insert] board");
 				response.sendRedirect("/board/list?page=1");
