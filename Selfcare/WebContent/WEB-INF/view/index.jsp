@@ -47,6 +47,7 @@
 </style>
 </head>
 <body>
+<<<<<<< HEAD
 	<jsp:include page="./layout/header.jsp" />
 	<div class="content-wrap">
 		<p class="introduce">
@@ -88,5 +89,9 @@
 			</div>
 		</div>
 	</div>
+=======
+<jsp:include page= "./layout/header.jsp"/>
+	메인화면입니다.
+>>>>>>> branch 'main' of https://github.com/lichee55/Selfcare.git
 </body>
 </html>
