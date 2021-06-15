@@ -16,16 +16,15 @@
 					<td>${comment.mem_id}</td>
 					<td>${comment.regdate}</td>
 					<td>${comment.contents}</td>
-					<td colspan=2 align="center"><input type="submit" value="수정" onclick="location.href='commentFooter.jsp'">
-					<td colspan=2 align="center"><input type="submit" value="삭제">
+					<button type="submit" value="수정" onclick="location.href='commentUpdate.jsp'">수정</button>
+					<button type="submit" value="삭제">삭제</button>
 				</tr>
 			</c:forEach>
 		</table>
 		
-		<!-- <td><textarea rows="7" cols="50" name="comment_content"></textarea></td>
-		<td colspan=2 align="center"><input type="submit" value="저장"></td>
-		-->
-		<jsp:include page= "commentFooter.jsp"/>
+		<td><textarea rows="7" cols="50" name="comment_content"></textarea></td>
+		<button type="submit" value="저장">저장</td>
+		
 	</form>
 </body>
 </html>
