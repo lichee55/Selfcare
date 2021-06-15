@@ -10,9 +10,7 @@
 <fieldset disabled>
 	<legend>
 		<form method="get">
-			<label for="uname"><b>id</b></label> 
-			<input type="text" value=${board.board_Id} name="board_Id" readonly>
-			<br>
+			<input type="hidden" value=${board.board_Id} name="board_Id">
 			<label for="uname"><b>Á¦¸ñ</b></label> 
 			<input type="text" value=${board.title} name="title" readonly>
 			<br>
