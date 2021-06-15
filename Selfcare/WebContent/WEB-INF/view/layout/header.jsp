@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -124,17 +125,18 @@ a {
 <body>
 	<div class="container">
 		<h1 class="navbar-brand">
-			<a href="#" class="active" onmouseout="blackStyle(this)"
+			<a href="/main/index" class="active" onmouseout="blackStyle(this)"
 				onmouseover="redStyle(this)">Self Care</a>
 		</h1>
 
 		<div id="mySidenav" class="sidenav">
 			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
 				onmouseout="grayStyle(this)" onmouseover="redStyle(this)">&times;</a>
-			<a href="#" onmouseout="grayStyle(this)" onmouseover="redStyle(this)">일기</a>
-			<a href="#" onmouseout="grayStyle(this)" onmouseover="redStyle(this)">할
-				일</a> <a href="#" onmouseout="grayStyle(this)"
-				onmouseover="redStyle(this)">게시판</a> <a href="#"
+			<a href="/diary/list" onmouseout="grayStyle(this)"
+				onmouseover="redStyle(this)">일기</a> <a href="/task/"
+				onmouseout="grayStyle(this)" onmouseover="redStyle(this)">할 일</a> <a
+				href="/board/list" onmouseout="grayStyle(this)"
+				onmouseover="redStyle(this)">게시판</a> <a href="/main/login"
 				onmouseout="grayStyle(this)" onmouseover="redStyle(this)">로그인</a>
 		</div>
 		<span id="span-side" style="font-size: 30px; cursor: pointer"
@@ -151,29 +153,39 @@ a {
 				<li><a href="/board/list" class="active"
 					onmouseout="blackStyle(this)" onmouseover="redStyle(this)">게시판</a>
 				</li>
-				<li><a href="/main/login" class="active"
-					onmouseout="blackStyle(this)" onmouseover="redStyle(this)">로그인</a>
-				</li>
+				<c:choose>
+					<c:when test="${empty sessionScope.member }">
+						<li><a href="/main/login" class="active"
+							onmouseout="blackStyle(this)" onmouseover="redStyle(this)">로그인</a>
+						</li>
+					</c:when>
+					<c:otherwise>
+				${member.mem_Id }
+					<li><a href="/main/logout" class="active"
+							onmouseout="blackStyle(this)" onmouseover="redStyle(this)">로그아웃</a>
+						</li>
+					</c:otherwise>
+				</c:choose>
 			</ul>
 		</div>
 	</div>
 	<script>
-        function openNav(){
-            document.getElementById("mySidenav").style.width="100%"
-        }
-        function closeNav(){
-            document.getElementById("mySidenav").style.width="0"
-        }
+		function openNav() {
+			document.getElementById("mySidenav").style.width = "100%"
+		}
+		function closeNav() {
+			document.getElementById("mySidenav").style.width = "0"
+		}
 
-        function redStyle(x){
-            x.style.color="#ff0000";
-        }
-        function blackStyle(x){
-            x.style.color="#444444";
-        }
-        function grayStyle(x){
-            x.style.color="#818181";
-        }
-    </script>
+		function redStyle(x) {
+			x.style.color = "#ff0000";
+		}
+		function blackStyle(x) {
+			x.style.color = "#444444";
+		}
+		function grayStyle(x) {
+			x.style.color = "#818181";
+		}
+	</script>
 </body>
 </html>

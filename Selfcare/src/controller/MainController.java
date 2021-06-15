@@ -60,6 +60,7 @@ public class MainController extends HttpServlet {
 				Member mem = memberService.findMemberById(mem_id);
 				HttpSession httpsession = request.getSession();
 				httpsession.setAttribute("member", mem);
+				httpsession.setAttribute("isLogin", true);
 				response.sendRedirect("/main/index");
 			}
 		} else {
