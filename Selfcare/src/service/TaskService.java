@@ -25,33 +25,34 @@ public class TaskService {
 	public ArrayList<ArrayList<Task>> findTaskByDate(LocalDateTime time, int during, Member member) {
 		ArrayList<Task> tasks = taskRepository.findTaskByDate(time, member);
 
-		LocalDateTime minTime = time.minusDays(during);
-		minTime.minusHours(minTime.getHour());
-		minTime.minusMinutes(minTime.getMinute());
-		minTime.minusSeconds(minTime.getSecond());
-		minTime.minusNanos(minTime.getNano());
+		LocalDateTime minTime = time.minusDays(2);
+		minTime = minTime.minusHours(minTime.getHour());
+		minTime = minTime.minusMinutes(minTime.getMinute());
+		minTime = minTime.minusSeconds(minTime.getSecond());
+		minTime = minTime.minusNanos(minTime.getNano());
 
-		LocalDateTime maxTime = time.plusDays(during + 1);
-		maxTime.minusHours(maxTime.getHour());
-		maxTime.minusMinutes(maxTime.getMinute());
-		maxTime.minusSeconds(maxTime.getSecond());
-		maxTime.minusNanos(maxTime.getNano());
+		LocalDateTime maxTime = time.plusDays(3);
+		maxTime = maxTime.minusHours(maxTime.getHour());
+		maxTime = maxTime.minusMinutes(maxTime.getMinute());
+		maxTime = maxTime.minusSeconds(maxTime.getSecond());
+		maxTime = maxTime.minusNanos(maxTime.getNano());
 
 		ArrayList<ArrayList<Task>> duringTasks = new ArrayList<ArrayList<Task>>();
 
 		int i = 0;
-		while (tasks.size() > i) {
-			if (tasks.get(i).getTaskdate().isAfter(minTime)) {
-				ArrayList<Task> daytasks = new ArrayList<Task>();
-				int date = tasks.get(i).getTaskdate().getDayOfMonth();
-				int j = i;
-				while ((tasks.get(j).getTaskdate().getDayOfMonth() == date) && (j < tasks.size())) {
-					daytasks.add(tasks.get(j));
-					j++;
-				}
-				duringTasks.add(daytasks);
-				i = j;
+		while (tasks.size() > i && minTime != maxTime) {
+			ArrayList<Task> daytasks = new ArrayList<Task>();
+			while ((i < tasks.size()) && (minTime.getDayOfMonth() == tasks.get(i).getTaskdate().getDayOfMonth())) {
+				daytasks.add(tasks.get(i));
+				i++;
 			}
+			duringTasks.add(daytasks);
+			minTime = minTime.plusDays(1);
+		}
+		i++;
+		for (; i < 5; i++) {
+			ArrayList<Task> daytasks = new ArrayList<Task>();
+			duringTasks.add(daytasks);
 		}
 
 		return duringTasks;
