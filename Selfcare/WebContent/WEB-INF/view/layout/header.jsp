@@ -19,9 +19,9 @@ a {
 }
 
 .container {
-	position: absolute;
+	position: static;
 	width: 100%;
-	top: 2.375rem;
+	top: 0;
 	left: 0;
 	padding: 0;
 	display: inline-block;
@@ -94,6 +94,7 @@ a {
 .sidenav {
 	height: 20rem;
 	width: 100%;
+	display: inline-block;
 	position: fixed;
 	z-index: 1;
 	top: 0;
