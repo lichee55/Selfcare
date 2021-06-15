@@ -26,4 +26,7 @@ public class BoardService {
 		boardRepository.updateHit(input);
         return boardRepository.findById(input);
     }
+	public int findNum() {
+        return boardRepository.findNum();
+    }
 }

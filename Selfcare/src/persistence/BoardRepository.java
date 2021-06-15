@@ -141,6 +141,41 @@ public class BoardRepository {
 		}		
 		return board;
 	}
+	public int findNum(){
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int idRe=0;
+		String sql = "SELECT COUNT(*) FROM BOARD";
+		Board board = new Board();
+		try {
+			conn = ds.getConnection();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			pstmt = conn.prepareStatement(sql);
+			//pstmt.setLong(1, id);
+			rs = pstmt.executeQuery(sql);
+			if (rs.next()) {
+				idRe=rs.getInt("count(*)");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}			
+		}		
+		return idRe;
+	}
 	
 	public ArrayList<Board> findBoardByPage(int pageNum) {
 		Connection conn = null;
