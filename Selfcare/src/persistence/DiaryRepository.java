@@ -103,7 +103,7 @@ public class DiaryRepository {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT * FROM DIARY WHERE BOARD_ID=?";
+		String sql = "SELECT * FROM DIARY WHERE isRemoved=0 AND DIARY_ID=?";
 		Diary diary = new Diary();
 		try {
 			conn = ds.getConnection();
@@ -139,11 +139,11 @@ public class DiaryRepository {
 		return diary;
 	}
 	
-	public ArrayList<Diary> findDiaryByPage(int pageNum) {
+	public ArrayList<Diary> findDiaryByPage(int pageNum, String memberId) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT * FROM DIARY ORDER BY REGDATE DESC LIMIT ?,10";
+		String sql = "SELECT * FROM DIARY WHERE isRemoved=0 AND MEMBER_ID=? ORDER BY REGDATE DESC LIMIT ?,10;";
 		ArrayList<Diary> diaryList = new ArrayList<Diary>();
 		try {
 			conn = ds.getConnection();
@@ -153,7 +153,8 @@ public class DiaryRepository {
 		}
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setLong(1, (pageNum-1)*10);
+			pstmt.setString(1, memberId);
+			pstmt.setLong(2, (pageNum-1)*10);
 			rs = pstmt.executeQuery(sql);
 			while (rs.next()) {
 				int idRe=rs.getInt("diary_id");
