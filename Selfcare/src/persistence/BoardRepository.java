@@ -147,7 +147,6 @@ public class BoardRepository {
 		ResultSet rs = null;
 		int idRe=0;
 		String sql = "SELECT COUNT(*) FROM BOARD";
-		Board board = new Board();
 		try {
 			conn = ds.getConnection();
 		} catch (SQLException e) {

@@ -27,4 +27,7 @@ public class DiaryService {
 	public Diary findById(int input) {
         return diaryRepository.findDiaryById(input);
     }
+	public int findNum() {
+        return diaryRepository.findNum();
+    }
 }
