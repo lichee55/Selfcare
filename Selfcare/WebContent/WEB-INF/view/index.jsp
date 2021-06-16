@@ -61,7 +61,7 @@
 <body>
 	<jsp:include page="./layout/header.jsp" />
 	<div class="background-self">
-		<img src="SelfCareIMG.jpg" width=100%>
+		<img src="./SelfCareIMG.jpg" width=100%>
 	</div>
 	<div class="content-wrap">
 		<p class="introduce">

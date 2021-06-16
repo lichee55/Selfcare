@@ -80,10 +80,13 @@ public class TaskController extends HttpServlet {
 				View view = new View(viewPath);
 				view.render(mv.getModel(), request, response);
 			} else {
+				System.out.println("post insert task");
 				HttpSession httpsession = request.getSession();
 				Member member = (Member) httpsession.getAttribute("member");
+				LocalDateTime inputdate = LocalDateTime.parse(request.getParameter("taskdate"));
 				Task task = new Task();
-				task.setContents(request.getParameter("title"));
+				task.setContents(request.getParameter("content"));
+				task.setTaskdate(inputdate);
 				task.setMem_Id(member.getMem_Id());
 				taskService.insert(task);
 				response.sendRedirect("/task/");

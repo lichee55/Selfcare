@@ -32,8 +32,7 @@
 		<div>
 			<a href="/task/insert">할 일 추가</a>
 		</div>
-		<br>
-		<br>
+		<br> <br>
 		<div class="day">
 			<span><strong>D + 2</strong></span>
 			<c:forEach var="tasks0" items="${task0}">
@@ -41,7 +40,7 @@
 					<span>${tasks0.contents}</span>
 					<div class="delBtn">
 						<form action="delete" method="POST">
-							<input type="hidden" value="${tasks0.task_Id }" name=" task_id" />
+							<input type="hidden" value="${tasks0.task_Id }" name="task_id" />
 							<input type="submit" value="삭제" />
 						</form>
 					</div>
@@ -54,7 +53,7 @@
 				<div>
 					<span>${tasks1.contents}</span>
 					<div class="delBtn">
-						<form method="post" action="delete">
+						<form method="POST" action="delete">
 							<input type="hidden" value="${tasks1.task_Id }" name="task_id" />
 							<input type="submit" value="삭제" />
 						</form>
@@ -69,7 +68,7 @@
 					<span>${tasks2.contents}</span>
 					<div class="delBtn">
 						<form action="delete" method="POST">
-							<input type="hidden" value="${tasks2.task_Id }" name=" task_id" />
+							<input type="hidden" value="${tasks2.task_Id }" name="task_id" />
 							<input type="submit" value="삭제" />
 						</form>
 					</div>
@@ -82,8 +81,8 @@
 				<div>
 					<span>${tasks3.contents}</span>
 					<div class="delBtn">
-						<form action="delete" method="POST">
-							<input type="hidden" value="${tasks3.task_Id }" name=" task_id" />
+						<form method="POST" action="delete">
+							<input type="hidden" value="${tasks3.task_Id }" name="task_id" />
 							<input type="submit" value="삭제" />
 						</form>
 					</div>
@@ -97,7 +96,7 @@
 					<span>${tasks4.contents}</span>
 					<div class="delBtn">
 						<form action="delete" method="POST">
-							<input type="hidden" value="${tasks4.task_Id }" name=" task_id" />
+							<input type="hidden" value="${tasks4.task_Id }" name="task_id" />
 							<input type="submit" value="삭제" />
 						</form>
 					</div>

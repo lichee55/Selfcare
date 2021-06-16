@@ -42,7 +42,7 @@ public class TaskRepository {
 	public void save(Task task) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		String sql = "INSERT INTO task(content,clear,regdate,member_id,isRemoved) VALUE (?,?,now(),?,0)";
+		String sql = "INSERT INTO task(content,clear,regdate,member_id,taskdate,isRemoved) VALUE (?,?,now(),?,?,0)";
 		try {
 			conn = ds.getConnection();
 		} catch (SQLException e) {
@@ -53,6 +53,8 @@ public class TaskRepository {
 			pstmt.setString(1, task.getContents());
 			pstmt.setInt(2, 0);
 			pstmt.setString(3, task.getMem_Id());
+			pstmt.setTimestamp(4, Timestamp.valueOf(task.getTaskdate()));
+			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
