@@ -38,5 +38,15 @@
 		</c:forEach>
 	</div>
 	<a href="/board/insert" method="GET">새 글 작성</a>
+	<script>
+        window.onkeydown = function(){
+            if(event.keyCode==37){
+                location.href="";
+            }
+            else if(event.keyCode==39){
+                location.href="";
+            }
+        }
+    </script>
 </body>
 </html>

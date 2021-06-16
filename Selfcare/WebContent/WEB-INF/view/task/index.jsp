@@ -104,5 +104,15 @@
 			</c:forEach>
 		</div>
 	</div>
+	<script>
+        window.onkeydown = function(){
+            if(event.keyCode==37){
+                location.href="";
+            }
+            else if(event.keyCode==39){
+                location.href="";
+            }
+        }
+    </script>
 </body>
 </html>

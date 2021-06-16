@@ -107,5 +107,15 @@ only screen and (max-width: 1100px),(min-device-width: 768px) and (max-device-wi
 		</c:forEach>
 	</div>
 	<a href="/diary/insert" method="GET">새 일기 작성</a>
+	<script>
+        window.onkeydown = function(){
+            if(event.keyCode==37){
+                location.href="";
+            }
+            else if(event.keyCode==39){
+                location.href="";
+            }
+        }
+    </script>
 </body>
 </html>
