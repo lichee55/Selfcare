@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import domain.Board;
+import domain.Comment;
 import domain.Member;
 import service.BoardService;
 
@@ -113,12 +114,35 @@ public class BoardController extends HttpServlet {
 		} else if (com.equals("/detail")) {
 			int board_id = Integer.parseInt(request.getParameter("id"));
 			Board board = boardService.findById(board_id);
+			ArrayList<Comment> comments = boardService.findCommentByBoardId(board);
 			ModelAndView mv = new ModelAndView();
 			mv.setViewName("detail");
 			mv.getModel().put("board", board);
+			mv.getModel().put("comments", comments);
 			String viewPath = viewResolver(mv.getViewName());
 			View view = new View(viewPath);
 			view.render(mv.getModel(), request, response);
+		} else if (com.equals("/insertcomment")) {
+			if (request.getMethod().equals("POST")) {
+				HttpSession httpsession = request.getSession();
+				Member member = (Member) httpsession.getAttribute("member");
+				int board_id = Integer.parseInt(request.getParameter("board_id"));
+				String content = request.getParameter("content");
+				Comment comment = new Comment(0, content, null, member.getMem_Id(), board_id, 0);
+				boardService.insertComment(comment);
+				response.sendRedirect("/board/detail?id=" + board_id);
+			}
+		} else if (com.equals("/deletecomment")) {
+			if (request.getMethod().equals("POST")) {
+				HttpSession httpsession = request.getSession();
+				Member member = (Member) httpsession.getAttribute("member");
+				int board_id = Integer.parseInt(request.getParameter("board_id"));
+				int comment_id = Integer.parseInt(request.getParameter("comment_id"));
+				Comment comment = new Comment(0, null, null, null, board_id, 0);
+				comment.setComment_Id(comment_id);
+				boardService.deleteComment(comment);
+				response.sendRedirect("/board/detail?id=" + board_id);
+			}
 		}
 	}
 
