@@ -161,7 +161,7 @@ a {
 						</li>
 					</c:when>
 					<c:otherwise>
-				${member.mem_Id }
+				 안녕하세요! ${member.name } 님!
 					<li><a href="/main/logout" class="active"
 							onmouseout="blackStyle(this)" onmouseover="redStyle(this)">로그아웃</a>
 						</li>
