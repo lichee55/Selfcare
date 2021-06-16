@@ -23,14 +23,37 @@
 .delBtn {
 	display: inline-block;
 }
+
+.controlField {
+	display: inline-block;
+	width: 100%
+}
+
+.addTask {
+	display: inline-block;
+	width: 60%
+}
+
+.memoField {
+	display: inline-block;
+	width: 30%
+}
 </style>
 </head>
 <body>
 	<jsp:include page="../layout/header.jsp" />
 
 	<div class="taskContainer">
-		<div>
-			<a href="/task/insert">할 일 추가</a>
+		<div class="controlField">
+			<div class="addTask">
+				<a href="/task/insert">할 일 추가(링크)</a>
+			</div>
+			<div class="memoField">
+				<span>메모 추가</span> <input type="text" class="memoContent"> <input
+					type="button" value="추가" class="addMemo">
+				<div class="memoContents"></div>
+				<input type="button" value="메모 전체삭제" class="delMemo">
+			</div>
 		</div>
 		<br> <br>
 		<div class="day">
@@ -105,14 +128,27 @@
 		</div>
 	</div>
 	<script>
-        window.onkeydown = function(){
-            if(event.keyCode==37){
-                location.href="";
-            }
-            else if(event.keyCode==39){
-                location.href="";
-            }
-        }
-    </script>
+		window.onkeydown = function() {
+			if (event.keyCode == 37) {
+				location.href = "";
+			} else if (event.keyCode == 39) {
+				location.href = "";
+			}
+		}
+
+		addBtn = document.querySelector(".addMemo");
+		addBtn.addEventListener("click", function() {
+			memoFiled = document.querySelector(".memoContents");
+			memo = document.querySelector(".memoContent");
+			memoFiled.innerHTML += "<div>" + memo.value + "</div>";
+			memo.value = "";
+		});
+
+		delBtn = document.querySelector(".delMemo");
+		delBtn.addEventListener("click", function() {
+			memoFiled = document.querySelector(".memoContents");
+			memoFiled.innerHTML = "";
+		});
+	</script>
 </body>
 </html>
