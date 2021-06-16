@@ -78,14 +78,12 @@
 .commentInsertDiv {
 	display: inline-block;
 	width: 100%;
-	
 }
 
-.commentInsertForm{
+.commentInsertForm {
 	display: inline-block;
-	width:70%;
-	margin : 1rem auto;
-	
+	width: 70%;
+	margin: 1rem auto;
 }
 
 .insertComment {
@@ -125,19 +123,22 @@
 			<div class="content">${board.contents }</div>
 		</div>
 
+
 		<div class="formParent">
-			<form method="get">
-				<input type="hidden" value=${board.board_Id } name="board_id">
+			<c:if test="${member.mem_Id == board.mem_id }">
+				<form method="get">
+					<input type="hidden" value=${board.board_Id } name="board_id">
 
-				<input type="submit" class="formT" value="글 수정"
-					onclick="javascript: form.action='/board/update?id=${board.board_Id}';" />
-			</form>
-			<form method="post">
-				<input type="hidden" value=${board.board_Id } name="board_id">
+					<input type="submit" class="formT" value="글 수정"
+						onclick="javascript: form.action='/board/update?id=${board.board_Id}';" />
+				</form>
+				<form method="post">
+					<input type="hidden" value=${board.board_Id } name="board_id">
 
-				<input type="submit" class="formT" value="글 삭제"
-					onclick="javascript: form.action='/board/delete';" />
-			</form>
+					<input type="submit" class="formT" value="글 삭제"
+						onclick="javascript: form.action='/board/delete';" />
+				</form>
+			</c:if>
 		</div>
 		<br> <br> <br>
 		<div class="commentPart">
@@ -145,13 +146,14 @@
 				<strong>댓글</strong>
 			</div>
 			<div class="comment">
-				<strong class="writerField">작성자</strong><strong class="contentField">내용</strong><strong class="timeField">시간</strong>
+				<strong class="writerField">작성자</strong><strong class="contentField">내용</strong><strong
+					class="timeField">시간</strong>
 			</div>
 			<c:forEach var="comment" items="${comments}">
 				<div class="comment">
 					<span class="commentWriter"> <span>${comment.mem_id }</span>
-					</span> <span class="contentField">${comment.contents }</span>
-					<span class="timeField">${comment.regdate }</span>
+					</span> <span class="contentField">${comment.contents }</span> <span
+						class="timeField">${comment.regdate }</span>
 
 					<c:if test="${member.mem_Id ==comment.mem_id }">
 						<div class="delBtn">

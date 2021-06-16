@@ -110,10 +110,10 @@ only screen and (max-width: 1100px),(min-device-width: 768px) and (max-device-wi
 	<script>
         window.onkeydown = function(){
             if(event.keyCode==37){
-                location.href="";
+                location.href="/board/list";
             }
             else if(event.keyCode==39){
-                location.href="";
+                location.href="/task/";
             }
         }
     </script>

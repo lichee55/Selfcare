@@ -63,6 +63,10 @@ public class MainController extends HttpServlet {
 				httpsession.setAttribute("isLogin", true);
 				response.sendRedirect("/main/index");
 			}
+		} else if (com.equals("/logout")) {
+			HttpSession httpsession = request.getSession();
+			httpsession.removeAttribute("member");
+			response.sendRedirect("/main/index");
 		} else {
 			response.sendRedirect("/main/index");
 		}

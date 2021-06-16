@@ -38,6 +38,14 @@
 	display: inline-block;
 	width: 30%
 }
+
+@media (max-width : 1100px){
+	.day{
+		display : block;
+		margin : 3rem auto;
+	}
+}
+
 </style>
 </head>
 <body>
@@ -130,9 +138,9 @@
 	<script>
 		window.onkeydown = function() {
 			if (event.keyCode == 37) {
-				location.href = "";
+				location.href = "/diary/list";
 			} else if (event.keyCode == 39) {
-				location.href = "";
+				location.href = "/board/list";
 			}
 		}
 

@@ -41,10 +41,10 @@
 	<script>
         window.onkeydown = function(){
             if(event.keyCode==37){
-                location.href="";
+                location.href="/task/";
             }
             else if(event.keyCode==39){
-                location.href="";
+                location.href="/diary/list";
             }
         }
     </script>
