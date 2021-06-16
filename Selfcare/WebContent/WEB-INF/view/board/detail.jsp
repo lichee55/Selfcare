@@ -37,7 +37,14 @@
 	height: auto;
 	margin-bottom: 5rem;
 }
-
+.formT
+{
+	display: inline_block;
+}
+.formParent
+{
+	display: inline_block;
+}
 @media ( max-width :1100px) {
 	.info {
 		display: block;
@@ -68,12 +75,19 @@
 			<span><strong>글 내용</strong></span>
 			<div class="content">${board.contents }</div>
 		</div>
+		<div class="formParent">
 		<form method="get">
 			<input type="hidden" value=${board.board_Id } name="board_id">
 
-			<input type="submit" value="수정"
+			<input type="submit" class="formT" value="수정"
 				onclick="javascript: form.action='/board/update?id=${board.board_Id}';" />
 		</form>
+		<form method="post">
+			<input type="hidden" value=${board.board_Id } name="board_id">
+
+			<input type="submit" class="formT" value="삭제" onclick="javascript: form.action='/board/delete';"/>
+		</form>
+		</div>
 	</div>
 
 </body>
